@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Simulation - Movie Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f0a 0%, #0a1a0a 100%);
+            font-family: 'Courier New', 'Fira Code', 'Monaco', monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Matrix rain effect */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .terminal-container {
+            position: relative;
+            z-index: 1;
+            width: 95%;
+            max-width: 1200px;
+            height: 85vh;
+            background: rgba(0, 10, 0, 0.92);
+            border-radius: 12px;
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.05);
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .terminal-header {
+            background: rgba(0, 20, 0, 0.95);
+            padding: 12px 20px;
+            border-bottom: 1px solid #00ff41;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #00ff41;
+        }
+
+        .terminal-title {
+            display: flex;
+            gap: 15px;
+        }
+
+        .terminal-title span {
+            color: #00ff41;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff41;
+            opacity: 0.7;
+        }
+
+        .dot.red { background: #ff3333; }
+        .dot.yellow { background: #ffcc00; }
+        .dot.green { background: #00ff41; }
+
+        .terminal-content {
+            padding: 20px;
+            height: calc(100% - 45px);
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #00ff41;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+        }
+
+        .terminal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .terminal-content::-webkit-scrollbar-track {
+            background: #001a00;
+        }
+
+        .terminal-content::-webkit-scrollbar-thumb {
+            background: #00ff41;
+            border-radius: 4px;
+        }
+
+        .prompt {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .command-line {
+            margin: 5px 0;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .output {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #7eff80;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .error {
+            color: #ff6b6b;
+        }
+
+        .success {
+            color: #00ff41;
+        }
+
+        .warning {
+            color: #ffcc00;
+        }
+
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glitch {
+            animation: glitch 0.1s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 2px 0 red, -2px 0 blue; }
+            33% { text-shadow: -2px 0 red, 2px 0 blue; }
+            66% { text-shadow: 2px 0 blue, -2px 0 red; }
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 16px;
+            background: #00ff41;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        /* Big reveal name styling */
+        .final-name {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid #00ff41;
+            animation: glowPulse 1.5s ease-in-out infinite;
+        }
+
+        .final-name h1 {
+            font-size: 28px;
+            color: #00ff41;
+            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
+            letter-spacing: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .final-name p {
+            font-size: 12px;
+            color: #7eff80;
+            margin-top: 10px;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
+            }
+            50% {
+                text-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41, 0 0 40px #00ff41;
+            }
+        }
+
+        .typing-name {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #00ff41;
+            animation: typing 2s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff41; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">
+            <span>⚡</span>
+            <span>ROOT@HACKER_SHELL:~</span>
+            <span>🔒 ENCRYPTED</span>
+        </div>
+        <div class="terminal-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+    </div>
+    <div class="terminal-content" id="terminal">
+        <div class="command-line">
+            <span class="prompt">root@hacker:~$</span>
+            <span> ./initialize_attack_sequence --target=localhost</span>
+        </div>
+        <div class="output success">
+            [✓] Security protocols bypassed<br>
+            [✓] Root access granted<br>
+            [✓] Firewall penetration successful<br>
+            [✓] Anonymous routing enabled (TOR network)
+        </div>
+        
+        <div class="command-line">
+            <span class="prompt">root@hacker:~$</span>
+            <span> crypto_scanner --scan --depth=full</span>
+        </div>
+        <div class="output" id="crypto-output"></div>
+        
+        <div class="command-line">
+            <span class="prompt">root@hacker:~$</span>
+            <span> exploit_execution --payload=reverse_shell</span>
+        </div>
+        <div class="output" id="exploit-output"></div>
+        
+        <div class="command-line">
+            <span class="prompt">root@hacker:~$</span>
+            <span class="blink">_</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Matrix rain effect
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+{}[]<>?/~`';
+    const charArray = chars.split('');
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    
+    for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100;
+    }
+    
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 10, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00ff41';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+            const text = charArray[Math.floor(Math.random() * charArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    setInterval(drawMatrix, 35);
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    
+    // Hacker simulation data
+    const cryptoWallets = [
+        '0x7aBc1234DeF56789AbCdEf0123456789abcdef01',
+        '0x9EfF5678AbCd1234DeF56789AbCdEf0123456789',
+        '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+        'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq',
+        '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0'
+    ];
+    
+    const privateKeys = [
+        '5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF',
+        'L3VpWpUZ4qjF3HnJqZ7YvVvK3hVvVqZ9pYpZpZpZpZpZpZpZpZ',
+        '0x4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318'
+    ];
+    
+    const ipAddresses = [
+        '192.168.1.105', '10.0.0.45', '172.16.32.88', '185.234.72.19', 
+        '45.33.22.11', '103.86.1.200', '8.8.8.8', '1.1.1.1'
+    ];
+    
+    function randomItem(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+    
+    function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    function randomHash() {
+        let hash = '';
+        const hexChars = '0123456789abcdef';
+        for (let i = 0; i < 64; i++) {
+            hash += hexChars[Math.floor(Math.random() * hexChars.length)];
+        }
+        return hash;
+    }
+    
+    async function typeWriter(element, text, speed = 30) {
+        for (let i = 0; i < text.length; i++) {
+            element.innerHTML += text.charAt(i);
+            await new Promise(resolve => setTimeout(resolve, speed));
+            element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+    }
+    
+    async function runHackerSimulation() {
+        const cryptoOutput = document.getElementById('crypto-output');
+        const exploitOutput = document.getElementById('exploit-output');
+        
+        // Crypto scanning simulation
+        cryptoOutput.innerHTML = '';
+        const cryptoLines = [
+            `<span class="success">[+] Scanning blockchain for vulnerable wallets...</span>`,
+            `<span class="success">[+] Found ${randomInt(2, 7)} active wallets with weak encryption</span>`,
+            `<span class="warning">[!] Wallet 1: ${randomItem(cryptoWallets)} | Balance: ${randomInt(1, 50)} BTC</span>`,
+            `<span class="warning">[!] Wallet 2: ${randomItem(cryptoWallets)} | Balance: ${randomInt(100, 500)} ETH</span>`,
+            `<span class="success">[+] Extracting private keys using quantum algorithm...</span>`,
+            `<span class="error">[*] Private key recovered: ${randomItem(privateKeys)}</span>`,
+            `<span class="success">[+] Mnemonic phrase: abandon asset bonus castle digital evolve fruit garden happy island jungle kite</span>`,
+            `<span class="warning">[!] Transaction signed: ${randomHash().substring(0, 40)}...</span>`,
+            `<span class="success">[✓] Funds transferred to mixing pool</span>`
+        ];
+        
+        for (const line of cryptoLines) {
+            await new Promise(resolve => setTimeout(resolve, 300));
+            cryptoOutput.innerHTML += line + '<br>';
+            cryptoOutput.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+        
+        // Exploit execution
+        exploitOutput.innerHTML = '';
+        const exploitLines = [
+            `<span class="success">[+] Establishing reverse shell to ${randomItem(ipAddresses)}:4444</span>`,
+            `<span class="warning">[!] Bypassing IDS/IPS systems...</span>`,
+            `<span class="success">[+] Meterpreter session opened</span>`,
+            `<span class="error">[*] Dumping password hashes...</span>`,
+            `<span class="warning">[!] Hash found: administrator:${randomHash().substring(0, 32)}</span>`,
+            `<span class="success">[+] Cracking with rockyou.txt...</span>`,
+            `<span class="error">[*] Password recovered: "P@ssw0rd2024"</span>`,
+            `<span class="success">[+] Privilege escalation successful (NT AUTHORITY\\SYSTEM)</span>`,
+            `<span class="warning">[!] Installing persistence...</span>`,
+            `<span class="success">[✓] Backdoor deployed: C:\\Windows\\System32\\svchost.exe</span>`,
+            `<span class="warning glitch">[!!!] ROOT ACCESS GRANTED - FULL SYSTEM COMPROMISED</span>`
+        ];
+        
+        for (const line of exploitLines) {
+            await new Promise(resolve => setTimeout(resolve, 400));
+            exploitOutput.innerHTML += line + '<br>';
+            exploitOutput.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+        
+        // Add the final name reveal
+        setTimeout(() => {
+            const terminal = document.getElementById('terminal');
+            
+            // Remove the blinking cursor line
+            const lastLine = terminal.querySelector('.command-line:last-child');
+            if (lastLine) lastLine.remove();
+            
+            // Create name reveal section
+            const nameSection = document.createElement('div');
+            nameSection.className = 'final-name';
+            nameSection.innerHTML = `
+                <h1 class="typing-name">SIMON CHRIST NOEL SIAHAAN</h1>
+                <p>✦ SYSTEM HACKED SUCCESSFULLY ✦</p>
+                <p>${new Date().toLocaleString()}</p>
+                <p style="font-size: 10px; margin-top: 15px;">[ ACCESS GRANTED - ADMIN PRIVILEGES ]</p>
+            `;
+            
+            terminal.appendChild(nameSection);
+            
+            // Add some celebratory glitch effects
+            setTimeout(() => {
+                nameSection.style.animation = 'glowPulse 0.5s ease-in-out 3';
+                const h1 = nameSection.querySelector('h1');
+                h1.style.animation = 'glitch 0.2s infinite';
+                setTimeout(() => {
+                    h1.style.animation = '';
+                }, 1000);
+            }, 100);
+            
+            terminal.scrollTop = terminal.scrollHeight;
+        }, 1000);
+        
+        // Additional fun effects
+        setTimeout(() => {
+            const terminal = document.getElementById('terminal');
+            const extraLines = [
+                `<div class="command-line"><span class="prompt">root@hacker:~$</span><span> whoami</span></div>`,
+                `<div class="output success">root (UID=0, GID=0)</div>`,
+                `<div class="command-line"><span class="prompt">root@hacker:~$</span><span> cat /etc/shadow</span></div>`,
+                `<div class="output error">root:$6$randomhash$encrypted:19000:0:99999:7:::</div>`
+            ];
+            
+            extraLines.forEach(line => {
+                terminal.insertAdjacentHTML('beforeend', line);
+            });
+            
+            terminal.scrollTop = terminal.scrollHeight;
+        }, 2000);
+    }
+    
+    // Start simulation after 1 second
+    setTimeout(runHackerSimulation, 1500);
+    
+    // Add glitch effect occasionally
+    setInterval(() => {
+        const elements = document.querySelectorAll('.output');
+        if (Math.random() > 0.95) {
+            elements.forEach(el => {
+                el.classList.add('glitch');
+                setTimeout(() => el.classList.remove('glitch'), 200);
+            });
+        }
+    }, 5000);
+</script>
+</body>
+</html>
