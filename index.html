@@ -2,466 +2,693 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapo Tungku Masakan Elok - Cita Rasa Otentik Batak</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Tungku Masakan Elok | Restoran Batak Medan - Pesan Online WhatsApp</title>
+    <!-- Google Fonts & Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* CSS Reset & Basic Styling */
-        *, *::before, *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fdfaf6;
+            font-family: 'Inter', sans-serif;
+            background: #fef7f0;
+            color: #2a241f;
+            scroll-behavior: smooth;
         }
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: 'Times New Roman', Times, serif;
-            color: #5d4037;
-            line-height: 1.2;
+        h1, h2, h3, .logo-text {
+            font-family: 'Playfair Display', serif;
         }
 
-        h1 { font-size: 3.5rem; }
-        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 40px; }
-        h3 { font-size: 1.5rem; }
-
-        /* General Layout */
         .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 20px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        section {
-            padding: 80px 0;
-        }
-
-        /* Header & Navigation */
-        .header {
-            background-color: rgba(45, 33, 27, 0.9);
-            color: #fff;
-            padding: 15px 0;
-            position: fixed;
-            width: 100%;
+        /* Header */
+        header {
+            background: #fffaf5;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            position: sticky;
             top: 0;
             z-index: 1000;
-            transition: background-color 0.3s;
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid #f0e2d4;
         }
-
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            gap: 16px;
         }
-
-        .logo {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffc107;
-            text-decoration: none;
+        .logo h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #b1431c;
+            letter-spacing: -0.3px;
         }
-
+        .logo p {
+            font-size: 0.7rem;
+            color: #a55f3e;
+        }
         .nav-links {
-            list-style: none;
             display: flex;
+            gap: 28px;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
         }
-
-        .nav-links li {
-            margin-left: 25px;
-        }
-
         .nav-links a {
-            color: #fff;
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
+            font-weight: 500;
+            color: #4b3627;
+            transition: 0.2s;
         }
-
         .nav-links a:hover {
-            color: #ffc107;
+            color: #c85324;
+        }
+        .btn-wa-nav {
+            background: #25D366;
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .btn-wa-nav:hover {
+            background: #128C7E;
+            transform: scale(0.97);
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555939594-58d7cb56161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+            background: linear-gradient(105deg, #feeddf 0%, #ffe2d0 100%);
+            padding: 60px 0 70px;
+            border-radius: 0 0 48px 48px;
+            margin-bottom: 30px;
+        }
+        .hero-grid {
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
             align-items: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
+            gap: 40px;
         }
-
-        .hero-content h1 {
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        .hero-text {
+            flex: 1.2;
         }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 20px auto 30px;
-        }
-
-        .btn {
+        .badge {
+            background: #cd5c2e;
             display: inline-block;
-            padding: 12px 25px;
-            background-color: #ffc107;
-            color: #333;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: transform 0.3s, background-color 0.3s;
-            margin: 5px;
+            padding: 5px 16px;
+            border-radius: 60px;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
-        
-        .btn:hover {
-            background-color: #ffca2c;
-            transform: translateY(-3px);
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4f2b18;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+        .hero-text p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #6a4c36;
+            max-width: 90%;
+        }
+        .hero-feature {
+            display: flex;
+            gap: 28px;
+            margin: 28px 0 20px;
+            flex-wrap: wrap;
+        }
+        .hero-feature span i {
+            color: #d66832;
+            margin-right: 8px;
+        }
+        .hero-img {
+            flex: 0.9;
+            background: #e7cdb9;
+            border-radius: 36px;
+            height: 280px;
+            background-image: url('https://placehold.co/600x420/dcbea6/7a4c2e?text=Sangsang+%26+BPK+Medan');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
         }
 
-        /* Menu Section */
-        #menu {
-            background-color: #fff;
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
         }
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #4a2a1a;
+            font-weight: 600;
+        }
+        .section-title p {
+            color: #8e6b50;
+            max-width: 580px;
+            margin: 8px auto 0;
+        }
+
+        /* Menu Grid dengan Foto-foto */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
         }
         .menu-card {
-            background: #fdfaf6;
-            border: 1px solid #eee;
-            border-radius: 8px;
+            background: white;
+            border-radius: 32px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.08);
+            transition: all 0.25s;
+            border: 1px solid #f0e0d0;
         }
         .menu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 36px -14px rgba(0,0,0,0.12);
         }
-        .menu-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .menu-content {
-            padding: 20px;
-        }
-        .menu-title {
+        .menu-img {
+            height: 210px;
+            background-size: cover;
+            background-position: center;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 12px;
         }
-        .menu-title h3 {
-            margin: 0;
+        .cat-tag {
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(4px);
+            padding: 4px 14px;
+            border-radius: 40px;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
-        .menu-price {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #8c5a4b;
+        .menu-info {
+            padding: 18px 20px 24px;
         }
-        .menu-description {
-            font-size: 0.9rem;
-            color: #666;
+        .menu-info h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #402c1f;
         }
-
-        /* Gallery Section */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
+        .price {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #c45127;
+            margin: 10px 0 8px;
         }
-        .gallery-item img {
+        .desc {
+            color: #7b5d46;
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+        .order-item {
+            margin-top: 16px;
+            background: #faf0e8;
+            border: none;
+            padding: 10px 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #b8471e;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        .order-item:hover {
+            background: #e6cdbb;
+            color: #872f0a;
         }
 
-        /* Contact Section */
-        #kontak {
-             background-color: #fff;
+        /* Story Transformasi */
+        .story-section {
+            background: #fff0e6;
+            border-radius: 48px;
+            padding: 48px 36px;
+            margin: 40px 0;
         }
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .story-grid {
+            display: flex;
+            flex-wrap: wrap;
             gap: 40px;
             align-items: center;
         }
-        .contact-info p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+        .story-text {
+            flex: 1.4;
         }
-        .contact-info strong {
-            color: #5d4037;
+        .story-text h3 {
+            font-size: 1.9rem;
+            color: #3f2c1d;
         }
-        .map-wrapper {
-            position: relative;
-            padding-bottom: 75%; /* 4:3 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            border: 2px solid #eee;
+        .badge-modern {
+            background: #bb5b30;
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 60px;
+            color: white;
+            font-size: 0.75rem;
+            margin-bottom: 16px;
         }
-        .map-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .story-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 25px;
+        }
+        .stat span {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #bb5b30;
+        }
+        .story-img {
+            flex: 1;
+            background: #e2cfbe;
+            border-radius: 32px;
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Teknologi Panel */
+        .tech-panel {
+            background: white;
+            border-radius: 36px;
+            padding: 32px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+            border: 1px solid #f0e2d4;
+            margin: 40px 0;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+        .gap-list {
+            list-style: none;
+        }
+        .gap-list li {
+            margin-bottom: 14px;
+            border-left: 3px solid #d66832;
+            padding-left: 16px;
+        }
+        table {
             width: 100%;
-            height: 100%;
-            border: 0;
+            border-collapse: collapse;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0dfd2;
+        }
+        th {
+            background: #e9d5c4;
+            color: #2d241e;
         }
 
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: #a0a0a0;
-            padding: 30px 20px;
+        /* CTA WhatsApp */
+        .cta-wa-large {
+            background: #1e3a2f;
+            border-radius: 48px;
+            padding: 40px 32px;
             text-align: center;
+            margin: 50px 0;
+            background: linear-gradient(135deg, #164b36, #1e5a40);
         }
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .cta-wa-large h3 {
+            color: white;
+            font-size: 2rem;
         }
-        .footer p {
-            margin: 5px 0;
-            font-size: 0.9rem;
+        .btn-wa-big {
+            background: #25D366;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 38px;
+            border-radius: 60px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        }
+        .btn-wa-big:hover {
+            background: #075e54;
+            transform: scale(1.02);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 70%;
-                height: 100vh;
-                background-color: #333;
+        footer {
+            background: #201b16;
+            color: #ebd7c8;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.75rem;
+        }
+        @media (max-width: 700px) {
+            .navbar {
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transform: translateX(100%);
-                transition: transform 0.3s ease-in-out;
+                text-align: center;
             }
-            
-            .nav-links.active {
-                transform: translateX(0);
+            .hero-text h1 {
+                font-size: 2rem;
             }
-            
-            .nav-links li {
-                margin: 20px 0;
-            }
-            
-            .hamburger {
-                display: block;
-                cursor: pointer;
-                z-index: 1001;
-            }
-
-            .hamburger div {
-                width: 25px;
-                height: 3px;
-                background-color: white;
-                margin: 5px;
-                transition: all 0.3s;
-            }
-
-            .contact-wrapper {
+            .grid-2col {
                 grid-template-columns: 1fr;
             }
         }
-        
-        .hamburger { display: none; }
-        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #25D366;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            z-index: 99;
+            transition: 0.2s;
+        }
+        .whatsapp-float a {
+            color: white;
+            font-size: 32px;
+        }
+        .whatsapp-float:hover {
+            background: #075e54;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container navbar">
-            <a href="#beranda" class="logo">Tungku Elok</a>
+<!-- Floating WhatsApp Button -->
+<div class="whatsapp-float">
+    <a href="https://wa.me/6285894646926?text=Halo%20Tungku%20Masakan%20Elok,%20saya%20ingin%20memesan%20menu%20(lihat%20daftar%20menu%20di%20website)" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h1>🍲 Tungku Masakan Elok</h1>
+                <p>Restoran Batak Medan • Rasa Otentik • Digital POS</p>
+            </div>
             <ul class="nav-links">
-                <li><a href="#beranda">Beranda</a></li>
-                <li><a href="#menu">Menu Kami</a></li>
-                <li><a href="#galeri">Galeri</a></li>
-                <li><a href="#kontak">Kontak & Lokasi</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#transformasi">Digital Story</a></li>
+                <li><a href="#teknologi">Teknologi</a></li>
+                <li><a href="https://wa.me/6285894646926?text=Saya%20mau%20pesan%20menu%20Tungku%20Elok" class="btn-wa-nav" target="_blank"><i class="fab fa-whatsapp"></i> Pesan via WA</a></li>
             </ul>
-            <div class="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <div class="badge"><i class="fas fa-fire"></i> Khas Batak Toba</div>
+            <h1>Sangsang, BPK, Arsik <br>Nikmati & Pesan Digital</h1>
+            <p>Dari dapur tradisional ke layar POS modern. Rekapitulasi instan, stok real-time, dan pemesanan lebih mudah melalui WhatsApp.</p>
+            <div class="hero-feature">
+                <span><i class="fas fa-mobile-alt"></i> Pesan via WA</span>
+                <span><i class="fas fa-chart-line"></i> Stok Akurat</span>
+                <span><i class="fas fa-receipt"></i> Laporan Langsung</span>
             </div>
         </div>
-    </header>
+        <div class="hero-img" style="background-image: url('https://placehold.co/700x400/dcc2ac/7a432b?text=Tungku+Masakan+Elok+BPK+Sangsang');"></div>
+    </div>
+</section>
 
-    <main>
-        <section class="hero" id="beranda">
-            <div class="hero-content">
-                <h1>Cita Rasa Otentik Batak, Disajikan dengan Elok dan bau kontol.</h1>
-                <p>Nikmati warisan kuliner khas Medan dalam suasana modern, bersih, dan ramah. Setiap suapan adalah perayaan rasa yang tak terlupakan.</p>
-                <a href="#menu" class="btn">Lihat Menu</a>
-                <a href="#kontak" class="btn">Reservasi Sekarang</a>
+<!-- MENU LENGKAP dengan Foto Menu -->
+<div class="container" id="menu">
+    <div class="section-title">
+        <h2><i class="fas fa-utensils"></i> Menu Istimewa Kami</h2>
+        <p>Hidangan ikonik Batak, bumbu andaliman pilihan, siap memanjakan lidah Anda</p>
+    </div>
+    <div class="menu-grid">
+        <!-- Sangsang Babi -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/c2885e/fff4ea?text=Sangsang+Babi+Pedas');">
+                <span class="cat-tag"><i class="fas fa-drumstick-bite"></i> Hidangan Utama</span>
             </div>
-        </section>
-
-        <section id="menu">
-            <div class="container">
-                <h2>Menu Andalan Kami</h2>
-                <div class="menu-grid">
-                    <!-- Menu Card 1 -->
-                    <div class="menu-card">
-                        <img src="https://i.ibb.co/hZJ8VfS/sangsang.jpg" alt="Sangsang Babi">
-                        <div class="menu-content">
-                            <div class="menu-title">
-                                <h3>Sangsang Babi (Saksang)</h3>
-                                <span class="menu-price">Rp 45.000</span>
-                            </div>
-                            <p class="menu-description">Daging babi cincang pilihan dimasak dengan rempah pedas dan gurih, disempurnakan dengan getah (darah) untuk rasa otentik yang khas.</p>
-                        </div>
-                    </div>
-                    <!-- Menu Card 2 -->
-                    <div class="menu-card">
-                        <img src="https://i.ibb.co/K75yX9x/bpk.jpg" alt="Babi Panggang Karo">
-                        <div class="menu-content">
-                            <div class="menu-title">
-                                <h3>Babi Panggang Karo (BPK)</h3>
-                                <span class="menu-price">Rp 48.000</span>
-                            </div>
-                            <p class="menu-description">Daging babi renyah di luar dan juicy di dalam, dipanggang sempurna. Disajikan dengan saus darah dan sambal andaliman yang menggigit.</p>
-                        </div>
-                    </div>
-                    <!-- Menu Card 3 -->
-                    <div class="menu-card">
-                        <img src="https://i.ibb.co/VMyh02S/arsik.jpg" alt="Arsik Ikan Mas">
-                        <div class="menu-content">
-                            <div class="menu-title">
-                                <h3>Arsik Ikan Mas</h3>
-                                <span class="menu-price">Rp 52.000</span>
-                            </div>
-                            <p class="menu-description">Ikan mas segar dimasak tanpa santan dengan bumbu kuning kaya rempah, kecombrang, dan andaliman, hingga bumbu meresap sempurna.</p>
-                        </div>
-                    </div>
-                    <!-- Menu Card 4 -->
-                    <div class="menu-card">
-                        <img src="https://i.ibb.co/XFh3tq6/daun-ubi.jpg" alt="Daun Ubi Tumbuk">
-                        <div class="menu-content">
-                            <div class="menu-title">
-                                <h3>Daun Ubi Tumbuk</h3>
-                                <span class="menu-price">Rp 22.000</span>
-                            </div>
-                            <p class="menu-description">Daun singkong muda ditumbuk halus, dimasak dengan santan kelapa segar dan bumbu pilihan, menghasilkan tekstur lembut dan rasa gurih.</p>
-                        </div>
-                    </div>
-                    <!-- Menu Card 5 -->
-                     <div class="menu-card">
-                        <img src="https://i.ibb.co/L5hYv09/sangsang-ayam.jpg" alt="Sangsang Ayam Kampung">
-                        <div class="menu-content">
-                            <div class="menu-title">
-                                <h3>Sangsang Ayam Kampung</h3>
-                                <span class="menu-price">Rp 38.000</span>
-                            </div>
-                            <p class="menu-description">Alternatif lezat menggunakan ayam kampung pilihan dengan bumbu saksang yang kaya rasa (dimasak tanpa getah).</p>
-                        </div>
-                    </div>
-                    <!-- Menu Card 6 -->
-                    <div class="menu-card">
-                        <img src="https://i.ibb.co/4Z5H02w/teh-susu-jahe.jpg" alt="Teh Susu Jahe">
-                        <div class="menu-content">
-                            <div class="menu-title">
-                                <h3>Teh Susu Jahe Merah</h3>
-                                <span class="menu-price">Rp 12.000</span>
-                            </div>
-                            <p class="menu-description">Minuman hangat perpaduan teh, susu, dan jahe merah untuk menghangatkan badan dan menemani santapan Anda.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="menu-info">
+                <h3>Sangsang Babi (Saksang)</h3>
+                <div class="price">Rp45.000</div>
+                <div class="desc">Daging babi cincang rempah andaliman, santan, darah (opsional) — rasa legit pedas khas Batak.</div>
+                <button class="order-item" data-name="Sangsang Babi (Saksang)" data-price="45000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
             </div>
-        </section>
-        
-        <section id="galeri">
-            <div class="container">
-                <h2>Galeri Tungku Elok</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555939594-58d7cb56161a" alt="Hidangan andalan"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Suasana restoran"></div>
-                    <div class="gallery-item"><img src="https://i.ibb.co/VMyh02S/arsik.jpg" alt="Detail Arsik"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Interior restoran yang nyaman"></div>
-                    <div class="gallery-item"><img src="https://i.ibb.co/K75yX9x/bpk.jpg" alt="Detail BPK"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1579736340335-fee44615bbe5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" alt="Minuman segar"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="kontak">
-            <div class="container">
-                <h2>Kunjungi Kami</h2>
-                <div class="contact-wrapper">
-                    <div class="contact-info">
-                        <p><strong>Alamat:</strong><br>Jl. Kuliner Batak No. 21, Jakarta Selatan, 12345 (Contoh Lokasi)</p>
-                        <p><strong>Jam Operasional:</strong><br>Setiap Hari: 11:00 - 22:00 WIB</p>
-                        <p><strong>Reservasi & Info:</strong><br><a href="tel:+6281234567890" style="color:#ffc107; text-decoration:none;">+62 812-3456-7890</a></p>
-                        <p><strong>Email:</strong><br><a href="mailto:info@lapoelok.com" style="color:#ffc107; text-decoration:none;">info@lapoelok.com</a></p>
-                         <p>Untuk pemesanan online, kami tersedia di GoFood, GrabFood, dan ShopeeFood!</p>
-                    </div>
-                    <div class="map-wrapper">
-                        <!-- Ganti src dengan link embed Google Maps lokasi Anda -->
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260344428!2d106.81956131535071!3d-6.194420095514695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5390917b759%3A0x6b45e67356080477!2sMonumen%20Nasional!5e0!3m2!1sid!2sid!4v1677654316709!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <p>Ibnu Fathan Al Muqaffa (182230017)</p>
-            <p>Muhammad Habiby (182230107)</p>
-            <p>Faiz Noval Rabbani (182230138)</p>
-            <p>Shandio Sulaiman Daulay (182230229)</p>
-            <p>Rafael Simanjuntak (182230230)</p>
         </div>
-    </footer>
-    
-    <script>
-        // JavaScript for mobile navigation
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+        <!-- BPK -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/c48f67/fff2e6?text=Babi+Panggang+Karo');">
+                <span class="cat-tag"><i class="fas fa-utensil-spoon"></i> Hidangan Utama</span>
+            </div>
+            <div class="menu-info">
+                <h3>Babi Panggang Karo (BPK)</h3>
+                <div class="price">Rp48.000</div>
+                <div class="desc">BPK dengan bumbu karo, daging empuk, sambal andaliman dan darah.</div>
+                <button class="order-item" data-name="Babi Panggang Karo (BPK)" data-price="48000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
+            </div>
+        </div>
+        <!-- Arsik Ikan Mas -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/c68453/fff0e2?text=Arsik+Ikan+Mas');">
+                <span class="cat-tag"><i class="fas fa-fish"></i> Hidangan Utama</span>
+            </div>
+            <div class="menu-info">
+                <h3>Arsik Ikan Mas</h3>
+                <div class="price">Rp52.000</div>
+                <div class="desc">Ikan mas segar bumbu kuning, andaliman, asam batak, dan daun ubi.</div>
+                <button class="order-item" data-name="Arsik Ikan Mas" data-price="52000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
+            </div>
+        </div>
+        <!-- Daun Ubi Tumbuk -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/b8835a/fff6ed?text=Daun+Ubi+Tumbuk');">
+                <span class="cat-tag"><i class="fas fa-leaf"></i> Sayur & Lauk</span>
+            </div>
+            <div class="menu-info">
+                <h3>Daun Ubi Tumbuk</h3>
+                <div class="price">Rp22.000</div>
+                <div class="desc">Daun ubi tumbuk lembut, santan kental, rempah khas.</div>
+                <button class="order-item" data-name="Daun Ubi Tumbuk" data-price="22000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
+            </div>
+        </div>
+        <!-- Sangsang Ayam Kampung -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/c48b5c/fff2e5?text=Sangsang+Ayam+Kampung');">
+                <span class="cat-tag"><i class="fas fa-drumstick"></i> Hidangan Utama</span>
+            </div>
+            <div class="menu-info">
+                <h3>Sangsang Ayam Kampung</h3>
+                <div class="price">Rp38.000</div>
+                <div class="desc">Ayam kampung pilihan dengan bumbu andaliman meresap.</div>
+                <button class="order-item" data-name="Sangsang Ayam Kampung" data-price="38000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
+            </div>
+        </div>
+        <!-- Nasi Putih -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/e6c2a0/fef2e5?text=Nasi+Putih+Pulen');">
+                <span class="cat-tag"><i class="fas fa-bread-slice"></i> Pendamping</span>
+            </div>
+            <div class="menu-info">
+                <h3>Nasi Putih</h3>
+                <div class="price">Rp5.000</div>
+                <div class="desc">Nasi putih hangat pendamping sempurna.</div>
+                <button class="order-item" data-name="Nasi Putih" data-price="5000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
+            </div>
+        </div>
+        <!-- Teh Susu Jahe Merah -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/b37c4e/fff0e1?text=Teh+Susu+Jahe');">
+                <span class="cat-tag"><i class="fas fa-mug-hot"></i> Minuman</span>
+            </div>
+            <div class="menu-info">
+                <h3>Teh Susu Jahe Merah</h3>
+                <div class="price">Rp12.000</div>
+                <div class="desc">Jahe merah asli, susu creamy, minuman penghangat.</div>
+                <button class="order-item" data-name="Teh Susu Jahe Merah" data-price="12000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
+            </div>
+        </div>
+        <!-- Tuak Aren -->
+        <div class="menu-card">
+            <div class="menu-img" style="background-image: url('https://placehold.co/400x220/b58053/fcf0e2?text=Tuak+Aren+Khas');">
+                <span class="cat-tag"><i class="fas fa-wine-bottle"></i> Minuman</span>
+            </div>
+            <div class="menu-info">
+                <h3>Tuak Aren (Minuman Khas)</h3>
+                <div class="price">Rp15.000</div>
+                <div class="desc">Nira aren segar, autentik Batak.</div>
+                <button class="order-item" data-name="Tuak Aren" data-price="15000"><i class="fab fa-whatsapp"></i> Pesan via WA</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        
-        // Close menu when a link is clicked
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
-    </script>
+<!-- Transformasi Digital Odoo -->
+<div class="container" id="transformasi">
+    <div class="story-section">
+        <div class="story-grid">
+            <div class="story-text">
+                <div class="badge-modern"><i class="fas fa-laptop-code"></i> Transformasi Digital POS</div>
+                <h3>Dulu Nota Kertas, Sekarang Digital Real-time</h3>
+                <p>Sebelumnya pencatatan manual, rekap 1-2 jam setiap hari & laporan H+1. Sekarang dengan modul Odoo POS terintegrasi, pesanan langsung ke dapur, stok bahan baku otomatis berkurang & pemilik pantau penjualan real-time.</p>
+                <div class="story-stats">
+                    <div class="stat"><span>1-2 jam</span><br>hemat rekap</div>
+                    <div class="stat"><span>0</span><br>kesalahan nota</div>
+                    <div class="stat"><span>⚡ real-time</span><br>dashboard langsung</div>
+                </div>
+            </div>
+            <div class="story-img" style="background-image: url('https://placehold.co/500x300/dbc0ab/a5552c?text=POS+Modern+Lapo+Tungku');"></div>
+        </div>
+    </div>
+</div>
 
+<!-- Modul Odoo & Perbandingan Tabel -->
+<div class="container" id="teknologi">
+    <div class="tech-panel">
+        <h4><i class="fab fa-odnoklassniki"></i> Modul Odoo yang Digunakan</h4>
+        <div class="grid-2col">
+            <div>
+                <p><strong>🖥️ Point of Sale (POS)</strong> – Mode restoran, input digital, dapur mendapat pesanan instan, hitung total + pajak otomatis.</p>
+                <p><strong>📦 Inventory</strong> – Stok bahan baku berkurang otomatis via Bill of Materials (BoM), reordering rules & notifikasi stok tipis.</p>
+            </div>
+            <div>
+                <p><strong>🛒 Purchase</strong> – Terintegrasi dengan inventory, usulan RFQ ke vendor seperti Fathan Jaya Farm, Belina Ikan Segar.</p>
+                <p><strong>📊 Akuntansi & Audit</strong> – Jejak digital setiap transaksi, transparansi pendapatan tinggi.</p>
+            </div>
+        </div>
+        <hr style="margin: 26px 0; border-color: #f0dfcf;">
+        <h4><i class="fas fa-chalkboard"></i> Kesenjangan yang Teratasi</h4>
+        <ul class="gap-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <li><i class="fas fa-times-circle" style="color:#d66832;"></i> Manual lambat → Digital cepat</li>
+            <li><i class="fas fa-clock"></i> Rekap 1-2 jam → Laporan instan</li>
+            <li><i class="fas fa-chart-line"></i> Perkiraan menu terlaris → Data realtime</li>
+            <li><i class="fas fa-archive"></i> Tanpa jejak digital → Audit trail</li>
+            <li><i class="fas fa-truck"></i> Stok tidak terpantau → Otomatis berkurang via BoM</li>
+            <li><i class="fas fa-chart-simple"></i> Laporan H+1 → Akses kapan saja</li>
+        </ul>
+    </div>
+
+    <!-- Tabel As-Is To-Be -->
+    <div class="tech-panel">
+        <h4><i class="fas fa-arrow-trend-up"></i> Sebelum vs Sesudah POS Digital</h4>
+        <table>
+            <thead>
+                <tr><th>Proses Bisnis</th><th>As-Is (Manual)</th><th>To-Be (Odoo POS)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Pencatatan Pesanan</td><td>Nota kertas, rawan salah/hilang</td><td>Layar POS, langsung ke dapur</td></tr>
+                <tr><td>Penghitungan Pembayaran</td><td>Manual, rawan keliru</td><td>Otomatis + pajak</td></tr>
+                <tr><td>Rekap Penjualan Harian</td><td>1-2 jam, laporan H+1 via WA</td><td>Otomatis, real-time dashboard</td></tr>
+                <tr><td>Analisis Menu & Stok</td><td>Perkiraan, stok tidak terhubung</td><td>Laporan menu laris, stok berkurang otomatis</td></tr>
+                <tr><td>Transparansi Pendapatan</td><td>Tidak ada jejak digital</td><td>Audit trail permanen</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- CTA PESAN VIA WHATSAPP NOMOR 085894646926 -->
+<div class="container">
+    <div class="cta-wa-large">
+        <h3><i class="fab fa-whatsapp"></i> Pesan Sekarang via WhatsApp</h3>
+        <p style="color: #e2f0ea; margin-bottom: 10px;">Klik tombol di bawah untuk memesan langsung ke nomor resmi kami</p>
+        <a href="https://wa.me/6285894646926?text=Halo%20Tungku%20Masakan%20Elok%2C%20saya%20mau%20pesan%20menu%3A%0A- Sangsang Babi%0A- Arsik Ikan Mas%0A- Nasi Putih%0ATolong%20info%20total%20dan%20estimasi%20waktu." class="btn-wa-big" target="_blank">
+            <i class="fab fa-whatsapp fa-2x"></i> Chat 0858-9464-6926 (Pesan Sekarang)
+        </a>
+        <p style="margin-top: 20px; font-size: 0.8rem;">Atau hubungi melalui tombol WA mengambang</p>
+    </div>
+</div>
+
+<footer>
+    <div class="container footer-inner">
+        <div>
+            <h4>Tungku Masakan Elok</h4>
+            <p>Melestarikan kuliner Batak Toba <br>dengan layanan digital terintegrasi</p>
+        </div>
+        <div>
+            <p><strong>Kontak & Alamat</strong></p>
+            <p><i class="fab fa-whatsapp"></i> 0858-9464-6926</p>
+            <p><i class="fas fa-map-marker-alt"></i> Jl. Batak No.88, Medan</p>
+            <p><i class="fas fa-clock"></i> 10.00 - 22.00 WIB</p>
+        </div>
+        <div>
+            <p><strong>Metode Pembayaran</strong></p>
+            <p>Tunai & Transfer Bank</p>
+            <p>POS Odoo • Real-time stock</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2025 Lapo Tungku Masakan Elok - Restoran Berbasis Odoo POS | Pemesanan via WhatsApp Terintegrasi</p>
+    </div>
+</footer>
+
+<script>
+    // Integrasi pemesanan setiap tombol menu ke WhatsApp 085894646926
+    const waNumber = "6285894646926";
+    const orderButtons = document.querySelectorAll('.order-item');
+    orderButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const menuName = btn.getAttribute('data-name');
+            const price = btn.getAttribute('data-price');
+            let message = `Halo *Tungku Masakan Elok*, saya ingin memesan:%0A- ${menuName} (Rp${parseInt(price).toLocaleString()})%0A%0ATolong info total + estimasi waktu. Terima kasih.`;
+            const url = `https://wa.me/${waNumber}?text=${message}`;
+            window.open(url, '_blank');
+        });
+    });
+
+    // Smooth scroll untuk navigasi
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href === "#") return;
+            if(href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const target = document.getElementById(targetId);
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
 </body>
 </html>
