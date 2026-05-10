@@ -1,478 +1,467 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker Simulation - Movie Style</title>
+    <title>Lapo Tungku Masakan Elok - Cita Rasa Otentik Batak</title>
     <style>
-        * {
+        /* CSS Reset & Basic Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            background: linear-gradient(135deg, #0a0f0a 0%, #0a1a0a 100%);
-            font-family: 'Courier New', 'Fira Code', 'Monaco', monospace;
-            min-height: 100vh;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fdfaf6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Times New Roman', Times, serif;
+            color: #5d4037;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 40px; }
+        h3 { font-size: 1.5rem; }
+
+        /* General Layout */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background-color: rgba(45, 33, 27, 0.9);
+            color: #fff;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffc107;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555939594-58d7cb56161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            overflow: hidden;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
         }
 
-        /* Matrix rain effect */
-        #matrix-canvas {
-            position: fixed;
+        .hero-content h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 20px auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ffc107;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #ffca2c;
+            transform: translateY(-3px);
+        }
+
+        /* Menu Section */
+        #menu {
+            background-color: #fff;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .menu-card {
+            background: #fdfaf6;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .menu-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .menu-content {
+            padding: 20px;
+        }
+        .menu-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .menu-title h3 {
+            margin: 0;
+        }
+        .menu-price {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #8c5a4b;
+        }
+        .menu-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        #kontak {
+             background-color: #fff;
+        }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .contact-info strong {
+            color: #5d4037;
+        }
+        .map-wrapper {
+            position: relative;
+            padding-bottom: 75%; /* 4:3 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid #eee;
+        }
+        .map-wrapper iframe {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            opacity: 0.15;
-            pointer-events: none;
+            border: 0;
         }
 
-        .terminal-container {
-            position: relative;
-            z-index: 1;
-            width: 95%;
-            max-width: 1200px;
-            height: 85vh;
-            background: rgba(0, 10, 0, 0.92);
-            border-radius: 12px;
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.05);
-            overflow: hidden;
-            backdrop-filter: blur(2px);
-        }
-
-        .terminal-header {
-            background: rgba(0, 20, 0, 0.95);
-            padding: 12px 20px;
-            border-bottom: 1px solid #00ff41;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            color: #00ff41;
-        }
-
-        .terminal-title {
-            display: flex;
-            gap: 15px;
-        }
-
-        .terminal-title span {
-            color: #00ff41;
-        }
-
-        .terminal-dots {
-            display: flex;
-            gap: 8px;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #00ff41;
-            opacity: 0.7;
-        }
-
-        .dot.red { background: #ff3333; }
-        .dot.yellow { background: #ffcc00; }
-        .dot.green { background: #00ff41; }
-
-        .terminal-content {
-            padding: 20px;
-            height: calc(100% - 45px);
-            overflow-y: auto;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #00ff41;
-            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
-        }
-
-        .terminal-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .terminal-content::-webkit-scrollbar-track {
-            background: #001a00;
-        }
-
-        .terminal-content::-webkit-scrollbar-thumb {
-            background: #00ff41;
-            border-radius: 4px;
-        }
-
-        .prompt {
-            color: #00ff41;
-            font-weight: bold;
-        }
-
-        .command-line {
-            margin: 5px 0;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .output {
-            margin-left: 20px;
-            margin-bottom: 15px;
-            color: #7eff80;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .error {
-            color: #ff6b6b;
-        }
-
-        .success {
-            color: #00ff41;
-        }
-
-        .warning {
-            color: #ffcc00;
-        }
-
-        .blink {
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-5px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .glitch {
-            animation: glitch 0.1s infinite;
-        }
-
-        @keyframes glitch {
-            0%, 100% { text-shadow: 2px 0 red, -2px 0 blue; }
-            33% { text-shadow: -2px 0 red, 2px 0 blue; }
-            66% { text-shadow: 2px 0 blue, -2px 0 red; }
-        }
-
-        .typing-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 16px;
-            background: #00ff41;
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-            margin-left: 2px;
-        }
-
-        /* Big reveal name styling */
-        .final-name {
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #a0a0a0;
+            padding: 30px 20px;
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            border-top: 2px solid #00ff41;
-            animation: glowPulse 1.5s ease-in-out infinite;
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
         }
 
-        .final-name h1 {
-            font-size: 28px;
-            color: #00ff41;
-            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
-            letter-spacing: 4px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .final-name p {
-            font-size: 12px;
-            color: #7eff80;
-            margin-top: 10px;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% {
-                text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 70%;
+                height: 100vh;
+                background-color: #333;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
             }
-            50% {
-                text-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41, 0 0 40px #00ff41;
+            
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            
+            .nav-links li {
+                margin: 20px 0;
+            }
+            
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                z-index: 1001;
+            }
+
+            .hamburger div {
+                width: 25px;
+                height: 3px;
+                background-color: white;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
             }
         }
-
-        .typing-name {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid #00ff41;
-            animation: typing 2s steps(30, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #00ff41; }
-        }
+        
+        .hamburger { display: none; }
+        
     </style>
 </head>
 <body>
 
-<canvas id="matrix-canvas"></canvas>
+    <header class="header">
+        <div class="container navbar">
+            <a href="#beranda" class="logo">Tungku Elok</a>
+            <ul class="nav-links">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#menu">Menu Kami</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#kontak">Kontak & Lokasi</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
 
-<div class="terminal-container">
-    <div class="terminal-header">
-        <div class="terminal-title">
-            <span>⚡</span>
-            <span>ROOT@HACKER_SHELL:~</span>
-            <span>🔒 ENCRYPTED</span>
-        </div>
-        <div class="terminal-dots">
-            <div class="dot red"></div>
-            <div class="dot yellow"></div>
-            <div class="dot green"></div>
-        </div>
-    </div>
-    <div class="terminal-content" id="terminal">
-        <div class="command-line">
-            <span class="prompt">root@hacker:~$</span>
-            <span> ./initialize_attack_sequence --target=localhost</span>
-        </div>
-        <div class="output success">
-            [✓] Security protocols bypassed<br>
-            [✓] Root access granted<br>
-            [✓] Firewall penetration successful<br>
-            [✓] Anonymous routing enabled (TOR network)
-        </div>
-        
-        <div class="command-line">
-            <span class="prompt">root@hacker:~$</span>
-            <span> crypto_scanner --scan --depth=full</span>
-        </div>
-        <div class="output" id="crypto-output"></div>
-        
-        <div class="command-line">
-            <span class="prompt">root@hacker:~$</span>
-            <span> exploit_execution --payload=reverse_shell</span>
-        </div>
-        <div class="output" id="exploit-output"></div>
-        
-        <div class="command-line">
-            <span class="prompt">root@hacker:~$</span>
-            <span class="blink">_</span>
-        </div>
-    </div>
-</div>
+    <main>
+        <section class="hero" id="beranda">
+            <div class="hero-content">
+                <h1>Cita Rasa Otentik Batak, Disajikan dengan Elok dan bau kontol.</h1>
+                <p>Nikmati warisan kuliner khas Medan dalam suasana modern, bersih, dan ramah. Setiap suapan adalah perayaan rasa yang tak terlupakan.</p>
+                <a href="#menu" class="btn">Lihat Menu</a>
+                <a href="#kontak" class="btn">Reservasi Sekarang</a>
+            </div>
+        </section>
 
-<script>
-    // Matrix rain effect
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+{}[]<>?/~`';
-    const charArray = chars.split('');
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = [];
-    
-    for (let i = 0; i < columns; i++) {
-        drops[i] = Math.random() * -100;
-    }
-    
-    function drawMatrix() {
-        ctx.fillStyle = 'rgba(0, 10, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        <section id="menu">
+            <div class="container">
+                <h2>Menu Andalan Kami</h2>
+                <div class="menu-grid">
+                    <!-- Menu Card 1 -->
+                    <div class="menu-card">
+                        <img src="https://i.ibb.co/hZJ8VfS/sangsang.jpg" alt="Sangsang Babi">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <h3>Sangsang Babi (Saksang)</h3>
+                                <span class="menu-price">Rp 45.000</span>
+                            </div>
+                            <p class="menu-description">Daging babi cincang pilihan dimasak dengan rempah pedas dan gurih, disempurnakan dengan getah (darah) untuk rasa otentik yang khas.</p>
+                        </div>
+                    </div>
+                    <!-- Menu Card 2 -->
+                    <div class="menu-card">
+                        <img src="https://i.ibb.co/K75yX9x/bpk.jpg" alt="Babi Panggang Karo">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <h3>Babi Panggang Karo (BPK)</h3>
+                                <span class="menu-price">Rp 48.000</span>
+                            </div>
+                            <p class="menu-description">Daging babi renyah di luar dan juicy di dalam, dipanggang sempurna. Disajikan dengan saus darah dan sambal andaliman yang menggigit.</p>
+                        </div>
+                    </div>
+                    <!-- Menu Card 3 -->
+                    <div class="menu-card">
+                        <img src="https://i.ibb.co/VMyh02S/arsik.jpg" alt="Arsik Ikan Mas">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <h3>Arsik Ikan Mas</h3>
+                                <span class="menu-price">Rp 52.000</span>
+                            </div>
+                            <p class="menu-description">Ikan mas segar dimasak tanpa santan dengan bumbu kuning kaya rempah, kecombrang, dan andaliman, hingga bumbu meresap sempurna.</p>
+                        </div>
+                    </div>
+                    <!-- Menu Card 4 -->
+                    <div class="menu-card">
+                        <img src="https://i.ibb.co/XFh3tq6/daun-ubi.jpg" alt="Daun Ubi Tumbuk">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <h3>Daun Ubi Tumbuk</h3>
+                                <span class="menu-price">Rp 22.000</span>
+                            </div>
+                            <p class="menu-description">Daun singkong muda ditumbuk halus, dimasak dengan santan kelapa segar dan bumbu pilihan, menghasilkan tekstur lembut dan rasa gurih.</p>
+                        </div>
+                    </div>
+                    <!-- Menu Card 5 -->
+                     <div class="menu-card">
+                        <img src="https://i.ibb.co/L5hYv09/sangsang-ayam.jpg" alt="Sangsang Ayam Kampung">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <h3>Sangsang Ayam Kampung</h3>
+                                <span class="menu-price">Rp 38.000</span>
+                            </div>
+                            <p class="menu-description">Alternatif lezat menggunakan ayam kampung pilihan dengan bumbu saksang yang kaya rasa (dimasak tanpa getah).</p>
+                        </div>
+                    </div>
+                    <!-- Menu Card 6 -->
+                    <div class="menu-card">
+                        <img src="https://i.ibb.co/4Z5H02w/teh-susu-jahe.jpg" alt="Teh Susu Jahe">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <h3>Teh Susu Jahe Merah</h3>
+                                <span class="menu-price">Rp 12.000</span>
+                            </div>
+                            <p class="menu-description">Minuman hangat perpaduan teh, susu, dan jahe merah untuk menghangatkan badan dan menemani santapan Anda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        ctx.fillStyle = '#00ff41';
-        ctx.font = fontSize + 'px monospace';
+        <section id="galeri">
+            <div class="container">
+                <h2>Galeri Tungku Elok</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555939594-58d7cb56161a" alt="Hidangan andalan"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Suasana restoran"></div>
+                    <div class="gallery-item"><img src="https://i.ibb.co/VMyh02S/arsik.jpg" alt="Detail Arsik"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Interior restoran yang nyaman"></div>
+                    <div class="gallery-item"><img src="https://i.ibb.co/K75yX9x/bpk.jpg" alt="Detail BPK"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1579736340335-fee44615bbe5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" alt="Minuman segar"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontak">
+            <div class="container">
+                <h2>Kunjungi Kami</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <p><strong>Alamat:</strong><br>Jl. Kuliner Batak No. 21, Jakarta Selatan, 12345 (Contoh Lokasi)</p>
+                        <p><strong>Jam Operasional:</strong><br>Setiap Hari: 11:00 - 22:00 WIB</p>
+                        <p><strong>Reservasi & Info:</strong><br><a href="tel:+6281234567890" style="color:#ffc107; text-decoration:none;">+62 812-3456-7890</a></p>
+                        <p><strong>Email:</strong><br><a href="mailto:info@lapoelok.com" style="color:#ffc107; text-decoration:none;">info@lapoelok.com</a></p>
+                         <p>Untuk pemesanan online, kami tersedia di GoFood, GrabFood, dan ShopeeFood!</p>
+                    </div>
+                    <div class="map-wrapper">
+                        <!-- Ganti src dengan link embed Google Maps lokasi Anda -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260344428!2d106.81956131535071!3d-6.194420095514695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5390917b759%3A0x6b45e67356080477!2sMonumen%20Nasional!5e0!3m2!1sid!2sid!4v1677654316709!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Ibnu Fathan Al Muqaffa (182230017)</p>
+            <p>Muhammad Habiby (182230107)</p>
+            <p>Faiz Noval Rabbani (182230138)</p>
+            <p>Shandio Sulaiman Daulay (182230229)</p>
+            <p>Rafael Simanjuntak (182230230)</p>
+        </div>
+    </footer>
+    
+    <script>
+        // JavaScript for mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
         
-        for (let i = 0; i < drops.length; i++) {
-            const text = charArray[Math.floor(Math.random() * charArray.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    }
-    
-    setInterval(drawMatrix, 35);
-    
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-    
-    // Hacker simulation data
-    const cryptoWallets = [
-        '0x7aBc1234DeF56789AbCdEf0123456789abcdef01',
-        '0x9EfF5678AbCd1234DeF56789AbCdEf0123456789',
-        '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
-        'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq',
-        '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0'
-    ];
-    
-    const privateKeys = [
-        '5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF',
-        'L3VpWpUZ4qjF3HnJqZ7YvVvK3hVvVqZ9pYpZpZpZpZpZpZpZpZ',
-        '0x4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318'
-    ];
-    
-    const ipAddresses = [
-        '192.168.1.105', '10.0.0.45', '172.16.32.88', '185.234.72.19', 
-        '45.33.22.11', '103.86.1.200', '8.8.8.8', '1.1.1.1'
-    ];
-    
-    function randomItem(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-    }
-    
-    function randomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    
-    function randomHash() {
-        let hash = '';
-        const hexChars = '0123456789abcdef';
-        for (let i = 0; i < 64; i++) {
-            hash += hexChars[Math.floor(Math.random() * hexChars.length)];
-        }
-        return hash;
-    }
-    
-    async function typeWriter(element, text, speed = 30) {
-        for (let i = 0; i < text.length; i++) {
-            element.innerHTML += text.charAt(i);
-            await new Promise(resolve => setTimeout(resolve, speed));
-            element.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }
-    }
-    
-    async function runHackerSimulation() {
-        const cryptoOutput = document.getElementById('crypto-output');
-        const exploitOutput = document.getElementById('exploit-output');
-        
-        // Crypto scanning simulation
-        cryptoOutput.innerHTML = '';
-        const cryptoLines = [
-            `<span class="success">[+] Scanning blockchain for vulnerable wallets...</span>`,
-            `<span class="success">[+] Found ${randomInt(2, 7)} active wallets with weak encryption</span>`,
-            `<span class="warning">[!] Wallet 1: ${randomItem(cryptoWallets)} | Balance: ${randomInt(1, 50)} BTC</span>`,
-            `<span class="warning">[!] Wallet 2: ${randomItem(cryptoWallets)} | Balance: ${randomInt(100, 500)} ETH</span>`,
-            `<span class="success">[+] Extracting private keys using quantum algorithm...</span>`,
-            `<span class="error">[*] Private key recovered: ${randomItem(privateKeys)}</span>`,
-            `<span class="success">[+] Mnemonic phrase: abandon asset bonus castle digital evolve fruit garden happy island jungle kite</span>`,
-            `<span class="warning">[!] Transaction signed: ${randomHash().substring(0, 40)}...</span>`,
-            `<span class="success">[✓] Funds transferred to mixing pool</span>`
-        ];
-        
-        for (const line of cryptoLines) {
-            await new Promise(resolve => setTimeout(resolve, 300));
-            cryptoOutput.innerHTML += line + '<br>';
-            cryptoOutput.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }
-        
-        // Exploit execution
-        exploitOutput.innerHTML = '';
-        const exploitLines = [
-            `<span class="success">[+] Establishing reverse shell to ${randomItem(ipAddresses)}:4444</span>`,
-            `<span class="warning">[!] Bypassing IDS/IPS systems...</span>`,
-            `<span class="success">[+] Meterpreter session opened</span>`,
-            `<span class="error">[*] Dumping password hashes...</span>`,
-            `<span class="warning">[!] Hash found: administrator:${randomHash().substring(0, 32)}</span>`,
-            `<span class="success">[+] Cracking with rockyou.txt...</span>`,
-            `<span class="error">[*] Password recovered: "P@ssw0rd2024"</span>`,
-            `<span class="success">[+] Privilege escalation successful (NT AUTHORITY\\SYSTEM)</span>`,
-            `<span class="warning">[!] Installing persistence...</span>`,
-            `<span class="success">[✓] Backdoor deployed: C:\\Windows\\System32\\svchost.exe</span>`,
-            `<span class="warning glitch">[!!!] ROOT ACCESS GRANTED - FULL SYSTEM COMPROMISED</span>`
-        ];
-        
-        for (const line of exploitLines) {
-            await new Promise(resolve => setTimeout(resolve, 400));
-            exploitOutput.innerHTML += line + '<br>';
-            exploitOutput.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }
-        
-        // Add the final name reveal
-        setTimeout(() => {
-            const terminal = document.getElementById('terminal');
-            
-            // Remove the blinking cursor line
-            const lastLine = terminal.querySelector('.command-line:last-child');
-            if (lastLine) lastLine.remove();
-            
-            // Create name reveal section
-            const nameSection = document.createElement('div');
-            nameSection.className = 'final-name';
-            nameSection.innerHTML = `
-                <h1 class="typing-name">SIMON CHRIST NOEL SIAHAAN</h1>
-                <p>✦ SYSTEM HACKED SUCCESSFULLY ✦</p>
-                <p>${new Date().toLocaleString()}</p>
-                <p style="font-size: 10px; margin-top: 15px;">[ ACCESS GRANTED - ADMIN PRIVILEGES ]</p>
-            `;
-            
-            terminal.appendChild(nameSection);
-            
-            // Add some celebratory glitch effects
-            setTimeout(() => {
-                nameSection.style.animation = 'glowPulse 0.5s ease-in-out 3';
-                const h1 = nameSection.querySelector('h1');
-                h1.style.animation = 'glitch 0.2s infinite';
-                setTimeout(() => {
-                    h1.style.animation = '';
-                }, 1000);
-            }, 100);
-            
-            terminal.scrollTop = terminal.scrollHeight;
-        }, 1000);
-        
-        // Additional fun effects
-        setTimeout(() => {
-            const terminal = document.getElementById('terminal');
-            const extraLines = [
-                `<div class="command-line"><span class="prompt">root@hacker:~$</span><span> whoami</span></div>`,
-                `<div class="output success">root (UID=0, GID=0)</div>`,
-                `<div class="command-line"><span class="prompt">root@hacker:~$</span><span> cat /etc/shadow</span></div>`,
-                `<div class="output error">root:$6$randomhash$encrypted:19000:0:99999:7:::</div>`
-            ];
-            
-            extraLines.forEach(line => {
-                terminal.insertAdjacentHTML('beforeend', line);
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
             });
-            
-            terminal.scrollTop = terminal.scrollHeight;
-        }, 2000);
-    }
-    
-    // Start simulation after 1 second
-    setTimeout(runHackerSimulation, 1500);
-    
-    // Add glitch effect occasionally
-    setInterval(() => {
-        const elements = document.querySelectorAll('.output');
-        if (Math.random() > 0.95) {
-            elements.forEach(el => {
-                el.classList.add('glitch');
-                setTimeout(() => el.classList.remove('glitch'), 200);
-            });
-        }
-    }, 5000);
-</script>
+        });
+    </script>
+
 </body>
 </html>
